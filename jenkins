@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Clone your GitHub repo
+                git branch: 'main', url: 'https://github.com/evcc-user/build_launchdemo'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Run your build commands here..."
+                // Example: sh 'make'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Run your test commands here..."
+                // Example: sh 'pytest'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline completed successfully!"
+        }
+        failure {
+            echo "Pipeline failed. Check logs."
+        }
+    }
+}
